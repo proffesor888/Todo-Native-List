@@ -23,7 +23,10 @@ const GoalList = (props) => {
 				visible={modal}
 				animationType='slide'
 				onRequestClose={closeModal}>
-				<Text>{selected.value}</Text>
+				<View style={styles.modalContainer}>
+					<Text>{selected.value}</Text>
+					<Button title='close' onPress={closeModal}/>
+				</View>
 			</Modal>
 			</View>
 	)
@@ -35,13 +38,12 @@ const styles = StyleSheet.create({
 		alignSelf: 'flex-start',
 		marginLeft: 40
 	},
-	list: {
-		//justifyContent: 'flex-start',
-		//alignItems: 'flex-start'
-	},
-	closeButton: {
+	modalContainer: {
 		flex: 1,
-		marginTop: 20
+		flexDirection: 'column',
+		marginTop: 50,
+		//justifyContent: 'center',
+		alignItems: 'center'
 	}
 })
 
