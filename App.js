@@ -27,6 +27,8 @@ export default class App extends Component<Props> {
   state = {
    userInput: '',
    goals: [],
+   showModal: false,
+   selected: {}
   };
   changeValue = e => {
     this.setState({userInput: e})
@@ -37,6 +39,13 @@ export default class App extends Component<Props> {
     goalMas.push(goal);
     this.setState({goals: goalMas, userInput: ''}); 
   };
+  selectGoal = (key) => {
+    const goal = this.state.goals.filter(item => item.key === key);
+    this.setState({selected: {...goal[0]}, showModal: true});
+  }
+  closeModal = () => {
+    this.setState({showModal: false});
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -50,7 +59,12 @@ export default class App extends Component<Props> {
        <Button 
        title='Add goal'
        onPress={this.addGoal}/>
-       <GoalList goals={this.state.goals}/>
+       <GoalList 
+        modal={this.state.showModal}
+        selected={this.state.selected}
+        goals={this.state.goals}
+        selectGoal={this.selectGoal}
+        closeModal={this.closeModal}/>
       </View>
     );
   }
