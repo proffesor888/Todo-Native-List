@@ -14,6 +14,10 @@ import {
   Button,
 } from 'react-native';
 import GoalList from './src/components/GoalList';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {addGoal, removeGoal} from './src/actions';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -23,7 +27,8 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
+
+class App extends Component<Props> {
   state = {
    userInput: '',
    goals: [],
@@ -70,6 +75,19 @@ export default class App extends Component<Props> {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    goals: state.goals.data
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    addGoal,
+    removeGoal
+  }, dispatch);
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -84,3 +102,5 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
   }
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

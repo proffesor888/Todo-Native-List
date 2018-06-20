@@ -11,7 +11,6 @@ import {
 
 const GoalList = (props) => {
 		const {goals, selectGoal, modal, closeModal, selected} = props;
-		console.warn(modal)
 		return (
 			<View style={styles.container}>
 			<FlatList 
