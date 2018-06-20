@@ -7,13 +7,19 @@ const initialState = {
 export default (state=initialState, action) => {
 	switch(action.type) {
 		case (ADD_GOAL) : {
+			const {payload} = action;
+			const mas = [...state.data];
+			mas.push(payload);
 			return {
-				...state, data: action.payload
+				...state, data: mas
 			}
 		}
 		case (REMOVE_GOAL): {
+			const {payload} = action;
+			const mas = [...state.data];
+			const newState = mas.filter(item => item.key !== payload);
 			return {
-				...state, data: action.payload
+				...state, data: newState
 			}
 		}
 		default: {

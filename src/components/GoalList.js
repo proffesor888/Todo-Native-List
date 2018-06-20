@@ -10,7 +10,7 @@ import {
 	} from 'react-native';
 
 const GoalList = (props) => {
-		const {goals, selectGoal, modal, closeModal, selected} = props;
+		const {goals, selectGoal, modal, closeModal, selected, removeGoal} = props;
 		return (
 			<View style={styles.container}>
 			<FlatList 
@@ -25,6 +25,7 @@ const GoalList = (props) => {
 				<View style={styles.modalContainer}>
 					<Text>{selected.value}</Text>
 					<Button title='close' onPress={closeModal}/>
+					<Button title='Remove Goal' onPress={()=> removeGoal(selected.key)} />
 				</View>
 			</Modal>
 			</View>

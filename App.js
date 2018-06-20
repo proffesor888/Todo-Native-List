@@ -40,18 +40,24 @@ class App extends Component<Props> {
   };
   addGoal = () => {
     const goal = {value: this.state.userInput, key: `${Math.random()*(1000-1)+1}`};
-    const goalMas = [...this.state.goals];
-    goalMas.push(goal);
-    this.setState({goals: goalMas, userInput: ''}); 
+    this.setState({userInput: ''});
+    this.props.addGoal(goal);
+    //const goalMas = [...this.state.goals];
+    //goalMas.push(goal); 
   };
   selectGoal = (key) => {
-    const goal = this.state.goals.filter(item => item.key === key);
+    const goal = this.props.goals.filter(item => item.key === key);
     this.setState({selected: {...goal[0]}, showModal: true});
   }
   closeModal = () => {
     this.setState({showModal: false});
   }
+  removeGoal = (key) => {
+    this.props.removeGoal(key);
+    this.setState({showModal: false});
+  }
   render() {
+    console.log(this.props.goals)
     return (
       <View style={styles.container}>
       <Text style={{marginTop: 50}}> Enter your goal :</Text>
@@ -67,9 +73,10 @@ class App extends Component<Props> {
        <GoalList 
         modal={this.state.showModal}
         selected={this.state.selected}
-        goals={this.state.goals}
+        goals={this.props.goals}
         selectGoal={this.selectGoal}
-        closeModal={this.closeModal}/>
+        closeModal={this.closeModal}
+        removeGoal={this.removeGoal}/>
       </View>
     );
   }
