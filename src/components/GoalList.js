@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { 
 	Text,
 	FlatList,
@@ -24,7 +25,10 @@ const GoalList = (props) => {
 				onRequestClose={closeModal}>
 				<View style={styles.modalContainer}>
 					<Text>{selected.value}</Text>
-					<Button title='close' onPress={closeModal}/>
+					<TouchableOpacity onPress={closeModal}>
+						<Icon name='times-circle' size={30}/>
+					</TouchableOpacity>
+					{/*<Button title='close' onPress={closeModal}/> */}
 					<Button title='Remove Goal' onPress={()=> removeGoal(selected.key)} />
 				</View>
 			</Modal>
